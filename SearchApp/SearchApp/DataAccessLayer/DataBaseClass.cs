@@ -10,7 +10,10 @@ namespace SearchApp.DataAccessLayer
     public class DataBaseClass
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SearchConnectionString"].ConnectionString);
-
+        
+        /* Create SQL Database Connection
+         * Write Method to fill DataSet of Account Data using Stored Procedure
+         */
         public DataSet GetAccounts()
         {
             try
@@ -22,9 +25,10 @@ namespace SearchApp.DataAccessLayer
                 da.Fill(ds);
                 return ds;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return null;
             }
+        }
     }
 }

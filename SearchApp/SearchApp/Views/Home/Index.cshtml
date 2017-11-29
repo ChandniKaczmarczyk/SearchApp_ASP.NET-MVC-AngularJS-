@@ -2,6 +2,40 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
-
+<h2 style="text-align:center">My Search Application </h2>
+<body ng-app="MySearchApp">
+    <div ng-controller="HomeController">
+        <label>Search Account</label>
+        <input type="text" class="form-control" placeholder="Enter Account Name" ng-model="SearchAccount.Name"/>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>
+                        Account Number
+                    </td>
+                    <td>
+                        Account Name
+                    </td>
+                    <td>
+                        Account Balance
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="account in accounts |filter: SearchAccount.Name">
+                    <td>
+                        {{account.Number}}
+                    </td>
+                    <td>
+                        {{account.Name}}
+                    </td>
+                    <td>
+                        {{account.Balance}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="~/AngularJS/angular.min.js"></script>
+    <script src="~/AngularJS/app.js"></script>
+</body>

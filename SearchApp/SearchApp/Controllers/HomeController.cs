@@ -19,20 +19,29 @@ namespace SearchApp.Controllers
             return View();
         }
 
+        // Write Action method to Get Data from the DataAccess Layer 
+        [HandleError]
         public JsonResult GetAccounts()
         {
-            DataSet ds = new DataSet();
-            List<Accounts> listAccounts = new List<Accounts>();
-            foreach(DataRow dr in ds.Tables[0].Rows)
+            try
             {
-                listAccounts.Add(new Accounts
+                DataSet ds = dbClass.GetAccounts();
+                List<Accounts> listAccounts = new List<Accounts>();
+                foreach (DataRow dr in ds.Tables[0].Rows)
                 {
-                    Number = dr["Number"].ToString(),
-                    Name = dr["Name"].ToString(),
-                    Balance=dr["Balance"].ToString()
-                });
+                    listAccounts.Add(new Accounts
+                    {
+                        Number = dr["Number"].ToString(),
+                        Name = dr["Name"].ToString(),
+                        Balance = dr["Balance"].ToString()
+                    });
+                }
+                return Json(listAccounts, JsonRequestBehavior.AllowGet);
             }
-            return Json(listAccounts, JsonRequestBehavior.AllowGet);
+            catch(Exception e)
+            {
+                return null;
+            }
         }
     }
 }
